@@ -24,10 +24,8 @@ const NAV_COLS = [
   {
     title: "Connect",
     links: [
-      { label: "Twitter / X", href: "#" },
-      { label: "LinkedIn", href: "#" },
-      { label: "Instagram", href: "#" },
-      { label: "GitHub", href: "#" },
+      { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61578025118254" },
+      { label: "WhatsApp", href: "https://wa.me/923040260023" },
     ],
   },
 ];
