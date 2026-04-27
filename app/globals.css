@@ -19,7 +19,7 @@
   --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: var(--font-syne), var(--font-body);
 
-  --nav-height: 80px;
+  --nav-height: 120px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -129,7 +129,7 @@ svg {
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 100;
+  z-index: 1000;
   width: calc(100% - 96px);
   max-width: 1304px;
   height: 64px;
@@ -434,6 +434,7 @@ svg {
   height: 40px;
   align-items: center;
   justify-content: center;
+  z-index: 1001;
 }
 
 .mobile-menu-toggle span {
@@ -442,6 +443,107 @@ svg {
   background: var(--white);
   transition: all 0.3s ease;
   border-radius: 2px;
+}
+
+.mobile-menu-toggle.open span:first-child {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.mobile-menu-toggle.open span:last-child {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+/* Mobile fullscreen menu overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 100px 32px 60px;
+  gap: 48px;
+}
+
+.mobile-menu-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-menu-link {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  padding: 12px 24px;
+  border-radius: 12px;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+
+.mobile-menu-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mobile-menu-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.mobile-menu-cta {
+  width: 100%;
+  padding: 16px 32px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: #0a0a0a;
+  background: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.mobile-menu-cta:hover {
+  background: #e8e8e8;
+  transform: translateY(-1px);
+}
+
+.mobile-menu-call {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--silver);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobile-menu-call:hover {
+  color: var(--white);
 }
 
 /* Mobile fallback for hero */
