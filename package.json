@@ -1,0 +1,30 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.0",
+    "@react-three/postprocessing": "^3.0.4",
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.2",
+    "next": "16.2.4",
+    "pg": "^8.20.0",
+    "postprocessing": "^6.39.1",
+    "prisma": "^7.8.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "recharts": "^3.8.1",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
