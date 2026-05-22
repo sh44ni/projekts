@@ -24,7 +24,10 @@ const NAV_COLS = [
   {
     title: "Connect",
     links: [
-      { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61578025118254" },
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/profile.php?id=61578025118254",
+      },
       { label: "WhatsApp", href: "https://wa.me/923040260023" },
     ],
   },
@@ -33,13 +36,13 @@ const NAV_COLS = [
 export default function Footer() {
   return (
     <footer className="footer" id="footer">
-      {/* Grid floor — background layer */}
+      {/* Grid floor background layer */}
       <div className="footer-terrain">
         <div className="floor-grid" />
         <div className="floor-horizon" />
       </div>
 
-      {/* Footer content — sits on top */}
+      {/* Footer content sits on top */}
       <div className="footer-content">
         <div className="footer-top">
           <div className="footer-brand">
@@ -51,7 +54,8 @@ export default function Footer() {
               style={{ objectFit: "contain" }}
             />
             <p className="footer-brand-desc">
-              We design and build high-performance digital products that drive real growth.
+              We design and build high-performance digital products that drive
+              real growth.
             </p>
           </div>
 

@@ -29,12 +29,12 @@ void main(){
   float pz = pos.z * 0.18;
   float slow = t * 0.035;
 
-  // Primary wave — large organic drift
+  // Primary wave large organic drift
   float fx = sin(py * 1.2 + slow + s * 6.28) * cos(pz * 0.8 + slow * 0.7) * 1.6;
   float fy = cos(px * 1.1 + slow * 0.9 + s * 4.71) * sin(pz * 0.9 + slow * 0.6) * 1.6;
   float fz = sin(px * 0.9 + slow * 0.8) * cos(py * 1.0 + slow * 1.1 + s * 3.14) * 0.8;
 
-  // Secondary detail — smaller ripple
+  // Secondary detail smaller ripple
   fx += sin(py * 2.5 + slow * 1.3 + 7.0) * 0.35;
   fy += cos(px * 2.3 + slow * 1.1 + 5.0) * 0.35;
   fz += sin(pz * 2.1 + slow * 1.5 + 3.0) * 0.2;
@@ -45,7 +45,7 @@ void main(){
   pos.x += sin(t * 0.3 + s * 62.83) * 0.12;
   pos.y += cos(t * 0.25 + s * 47.12) * 0.12;
 
-  // Mouse influence — soft push
+  // Mouse influence soft push
   vec2 mouseDir = pos.xy - uMouse * 5.0;
   float mouseDist = length(mouseDir);
   if(mouseDist < 3.0 && mouseDist > 0.01){
@@ -67,7 +67,6 @@ void main(){
   gl_Position = projectionMatrix * mvPos;
 }
 `;
-
 
 const PARTICLE_FRAGMENT = /* glsl */ `
 precision highp float;
@@ -137,7 +136,7 @@ function FlowFieldParticles({ mouse }) {
 }
 
 /* ═══════════════════════════════════════════
-   3D LOGO — Matte black + Fresnel edge glow
+   3D LOGO Matte black + Fresnel edge glow
    ═══════════════════════════════════════════ */
 const LOGO_VERTEX = /* glsl */ `
 varying vec3 vNormal;
@@ -161,7 +160,7 @@ void main(){
   vec3 n = normalize(vNormal);
   vec3 v = normalize(vViewDir);
 
-  // Fresnel rim glow — stronger
+  // Fresnel rim glow stronger
   float fresnel = 1.0 - abs(dot(n, v));
   float rim = pow(fresnel, 2.0);
   float rimFine = pow(fresnel, 5.0);
@@ -175,11 +174,11 @@ void main(){
   vec3 l3 = normalize(vec3(0.2, -0.5, 1.0));
   float diff = max(dot(n, l1), 0.0) * 0.12 + max(dot(n, l2), 0.0) * 0.06 + max(dot(n, l3), 0.0) * 0.04;
 
-  // Primary specular highlight — tight
+  // Primary specular highlight tight
   vec3 halfDir = normalize(l1 + v);
   float spec = pow(max(dot(n, halfDir), 0.0), 60.0) * 0.35;
 
-  // Secondary specular — broader sheen
+  // Secondary specular broader sheen
   vec3 halfDir2 = normalize(l2 + v);
   float spec2 = pow(max(dot(n, halfDir2), 0.0), 20.0) * 0.12;
 
@@ -193,7 +192,12 @@ void main(){
 }
 `;
 
-function LogoPiece({ geometry, edgeColor, edgeIntensity, position: pos = [0, 0, 0] }) {
+function LogoPiece({
+  geometry,
+  edgeColor,
+  edgeIntensity,
+  position: pos = [0, 0, 0],
+}) {
   const material = useMemo(
     () =>
       new THREE.ShaderMaterial({
@@ -204,7 +208,7 @@ function LogoPiece({ geometry, edgeColor, edgeIntensity, position: pos = [0, 0, 
         vertexShader: LOGO_VERTEX,
         fragmentShader: LOGO_FRAGMENT,
       }),
-    [edgeColor, edgeIntensity]
+    [edgeColor, edgeIntensity],
   );
 
   return <mesh geometry={geometry} material={material} position={pos} />;
@@ -215,14 +219,23 @@ function LogoGroup({ mouse }) {
 
   // From the actual Projekts logo SVG icon polygons
   const accentPoints = [
-    [45.7, 59.8], [24.34, 47.12], [0, 61.93],
-    [0, 121.25], [21.45, 134.1], [21.45, 73.49],
+    [45.7, 59.8],
+    [24.34, 47.12],
+    [0, 61.93],
+    [0, 121.25],
+    [21.45, 134.1],
+    [21.45, 73.49],
   ];
 
   const mainPoints = [
-    [24.49, 14.63], [45.23, 2.19], [97.38, 32.38],
-    [97.19, 90.61], [48.43, 117.72], [48.43, 93.08],
-    [75.36, 77.25], [75.36, 44.44],
+    [24.49, 14.63],
+    [45.23, 2.19],
+    [97.38, 32.38],
+    [97.19, 90.61],
+    [48.43, 117.72],
+    [48.43, 93.08],
+    [75.36, 77.25],
+    [75.36, 44.44],
   ];
 
   // Build both geometries sharing the same coordinate system, then center together
@@ -253,11 +266,17 @@ function LogoGroup({ mouse }) {
       return shape;
     }
 
-    const ag = new THREE.ExtrudeGeometry(makeShape(accentPoints), extrudeSettings);
+    const ag = new THREE.ExtrudeGeometry(
+      makeShape(accentPoints),
+      extrudeSettings,
+    );
     ag.translate(0, 0, -depth / 2); // center Z
     ag.computeVertexNormals();
 
-    const mg = new THREE.ExtrudeGeometry(makeShape(mainPoints), extrudeSettings);
+    const mg = new THREE.ExtrudeGeometry(
+      makeShape(mainPoints),
+      extrudeSettings,
+    );
     mg.translate(0, 0, -depth / 2); // center Z
     mg.computeVertexNormals();
 
@@ -267,19 +286,19 @@ function LogoGroup({ mouse }) {
   useFrame(() => {
     if (!groupRef.current) return;
 
-    // Mouse-driven rotation only — full 360° range
+    // Mouse-driven rotation only full 360° range
     const targetY = mouse.current.x * Math.PI; // -π to π
     const targetX = -mouse.current.y * Math.PI * 0.5; // -π/2 to π/2
 
     groupRef.current.rotation.y = THREE.MathUtils.lerp(
       groupRef.current.rotation.y,
       targetY,
-      0.04
+      0.04,
     );
     groupRef.current.rotation.x = THREE.MathUtils.lerp(
       groupRef.current.rotation.x,
       targetX,
-      0.04
+      0.04,
     );
   });
 
@@ -298,13 +317,25 @@ function LogoGroup({ mouse }) {
         position={[0, 0, 0]}
       />
       {/* Volumetric glow from center */}
-      <pointLight position={[0, 0, 2]} intensity={6} color="#e8e8ff" distance={10} decay={2} />
-      <pointLight position={[0, 0, -1.5]} intensity={3} color="#d0d0e8" distance={8} decay={2} />
+      <pointLight
+        position={[0, 0, 2]}
+        intensity={6}
+        color="#e8e8ff"
+        distance={10}
+        decay={2}
+      />
+      <pointLight
+        position={[0, 0, -1.5]}
+        intensity={3}
+        color="#d0d0e8"
+        distance={8}
+        decay={2}
+      />
     </group>
   );
 }
 
-/* Camera is fixed — logo handles all mouse interaction */
+/* Camera is fixed logo handles all mouse interaction */
 
 /* ═══════════════════════════════════════════
    MAIN SCENE EXPORT
@@ -330,7 +361,8 @@ export default function HeroScene() {
       <div
         className="hero-canvas"
         style={{
-          background: "radial-gradient(ellipse at 50% 45%, #151518 0%, #0a0a0a 70%)",
+          background:
+            "radial-gradient(ellipse at 50% 45%, #151518 0%, #0a0a0a 70%)",
         }}
       />
     );
@@ -354,14 +386,25 @@ export default function HeroScene() {
         <fog attach="fog" args={["#0a0a0a", 12, 28]} />
 
         <ambientLight intensity={0.08} />
-        <directionalLight position={[3, 4, 4]} intensity={1.8} color="#e8e8f4" />
-        <directionalLight position={[-2, 3, -3]} intensity={0.6} color="#a0a0c0" />
-        <pointLight position={[-3, 2, -2]} intensity={0.8} color="#8888a0" distance={12} />
+        <directionalLight
+          position={[3, 4, 4]}
+          intensity={1.8}
+          color="#e8e8f4"
+        />
+        <directionalLight
+          position={[-2, 3, -3]}
+          intensity={0.6}
+          color="#a0a0c0"
+        />
+        <pointLight
+          position={[-3, 2, -2]}
+          intensity={0.8}
+          color="#8888a0"
+          distance={12}
+        />
 
         <LogoGroup mouse={mouse} />
         <FlowFieldParticles mouse={mouse} />
-
-
       </Canvas>
     </div>
   );

@@ -38,3 +38,47 @@ model AdminUser {
   passwordHash String
   createdAt    DateTime @default(now())
 }
+
+model CaseStudy {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  published   Boolean  @default(false)
+  sortOrder   Int      @default(0)
+
+  // Card-level (homepage + listing)
+  client      String
+  logo        String   @default("")
+  category    String
+  title       String
+  description String   @default("")
+  coverImage  String   @default("")
+  metric      String   @default("")
+  metricLabel String   @default("")
+  tags        String[] @default([])
+
+  // Detail page
+  headline    String   @default("")
+  subtitle    String   @default("")
+  tech        String[] @default([])
+  challenge   String   @default("")
+  solution    String   @default("")
+  videoUrl    String   @default("")
+
+  // JSON fields
+  stats       Json     @default("[]")
+  gallery     Json     @default("[]")
+  features    Json     @default("[]")
+  sections    Json     @default("[]")
+  results     Json     @default("[]")
+
+  // CTA
+  ctaEyebrow  String   @default("")
+  ctaHeading  String   @default("")
+  ctaAccent   String   @default("")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, sortOrder])
+  @@index([slug])
+}

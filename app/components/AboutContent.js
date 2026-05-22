@@ -1,67 +1,30 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
+import { useContact } from "./ContactPopup";
 
 const TEAM = [
   {
     name: "Zeeshan Khan",
     role: "Full-Stack Developer",
     title: "Head of Operations",
-    initials: "ZK",
+    avatar: "https://picsum.photos/seed/zeeshan/200/200",
     skills: ["React", "Next.js", "Node.js", "AWS"],
-    quote: "Code is poetry — when it ships on time.",
   },
   {
     name: "Umar Farooq",
     role: "Full-Stack Developer",
     title: "Co-Founder",
-    initials: "UF",
+    avatar: "https://picsum.photos/seed/umar/200/200",
     skills: ["React", "Python", "DevOps", "System Design"],
-    quote: "Build it right, or build it twice.",
   },
   {
     name: "Bilal Ahmed",
     role: "Backend Dev & Digital Marketing",
     title: "Growth Lead",
-    initials: "BA",
+    avatar: "https://picsum.photos/seed/bilal/200/200",
     skills: ["Node.js", "PostgreSQL", "SEO", "Analytics"],
-    quote: "Data doesn't lie — listen to it.",
-  },
-  {
-    name: "Malka Sanghroo",
-    role: "UI/UX Designer",
-    title: "Business Development Manager",
-    initials: "MS",
-    skills: ["Figma", "Branding", "User Research", "Strategy"],
-    quote: "Design is how it works, not just how it looks.",
-  },
-];
-
-const CLIENTS = [
-  {
-    name: "Glitz & Glamour",
-    location: "United States",
-    flag: "🇺🇸",
-    desc: "Full-stack studio management platform with booking engine, AI chatbot, and contract automation.",
-  },
-  {
-    name: "Saymamanpower",
-    location: "Oman",
-    flag: "🇴🇲",
-    desc: "Enterprise workforce management system with recruitment pipelines and compliance tracking.",
-  },
-  {
-    name: "Himalaya Security",
-    location: "Pakistan",
-    flag: "🇵🇰",
-    desc: "Security operations platform with real-time guard tracking, incident reporting, and payroll integration.",
-  },
-  {
-    name: "& Many More",
-    location: "Switzerland · Pakistan · Global",
-    flag: "🌍",
-    desc: "Clients across fintech, healthcare, education, and e-commerce — from MVPs to enterprise-scale products.",
   },
 ];
 
@@ -76,27 +39,95 @@ const VALUES = [
   {
     num: "01",
     title: "Ship Fast, Ship Right",
-    desc: "We don't believe in perfection paralysis. We ship production-grade work in weeks — then iterate based on real data.",
+    desc: "Production-grade work in weeks, then iterate based on real data.",
+    icon: (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      </svg>
+    ),
   },
   {
     num: "02",
     title: "Radical Transparency",
-    desc: "No surprises. Weekly demos, shared Slack channels, real-time project boards. You see everything we see.",
+    desc: "Weekly demos, shared channels, real-time project boards. You see everything.",
+    icon: (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+    ),
   },
   {
     num: "03",
     title: "Own the Outcome",
-    desc: "We don't just write code and leave. We measure impact, track KPIs, and stay accountable for business results.",
+    desc: "We measure impact, track KPIs, and stay accountable for business results.",
+    icon: (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+    ),
   },
   {
     num: "04",
     title: "Global by Default",
-    desc: "Operating across time zones has made us exceptional communicators. Async-first, always documented, always reachable.",
+    desc: "Async-first, always documented, always reachable across time zones.",
+    icon: (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      </svg>
+    ),
   },
 ];
 
+const LOCATIONS = [
+  { city: "Pakistan", flag: "🇵🇰", role: "Engineering & Design HQ" },
+  { city: "Oman", flag: "🇴🇲", role: "Operations & Client Services" },
+  { city: "United States", flag: "🇺🇸", role: "Client Market" },
+  { city: "Switzerland", flag: "🇨🇭", role: "Client Market" },
+];
+
 export default function AboutContent() {
-  const statsRef = useRef(null);
+  const { setOpen } = useContact();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -107,7 +138,7 @@ export default function AboutContent() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
 
     const els = document.querySelectorAll(".about-animate");
@@ -127,15 +158,15 @@ export default function AboutContent() {
             <span className="about-headline-accent">global ambition.</span>
           </h1>
           <p className="about-hero-desc">
-            We&apos;re a tight-knit crew of developers, designers, and strategists based in
-            Pakistan and Oman — building digital products for clients across the US,
-            Switzerland, and beyond.
+            Developers, designers, and strategists based in Pakistan and Oman
+            building digital products for clients across the US, Switzerland,
+            and beyond.
           </p>
         </div>
       </section>
 
       {/* Stats bar */}
-      <section className="about-stats-bar about-animate" ref={statsRef}>
+      <section className="about-stats-bar about-animate">
         {STATS.map((s) => (
           <div key={s.label} className="about-stat">
             <span className="about-stat-value">{s.value}</span>
@@ -144,50 +175,88 @@ export default function AboutContent() {
         ))}
       </section>
 
-      <div className="section-connector"><span className="connector-glow" /></div>
+      <div className="section-connector">
+        <span className="connector-glow" />
+      </div>
 
-      {/* Story */}
+      {/* Story - visual split */}
       <section className="about-section">
         <div className="about-container">
-          <div className="about-story-grid">
-            <div className="about-story-left about-animate">
+          <div className="about-story-split about-animate">
+            <div className="about-story-text">
               <span className="about-label">Our Story</span>
               <h2 className="about-heading">
                 Born from freelancing.
-                <br />Built for scale.
+                <br />
+                Built for scale.
               </h2>
+              <p className="about-text">
+                Projekts started with a problem: agencies that over-promised and
+                under-delivered. So we built the agency we wished existed: lean,
+                technical, and focused on outcomes.
+              </p>
+              <p className="about-text">
+                Today we serve clients from San Francisco to Zurich. Every
+                project gets senior-level attention, direct access to the
+                builders, and the speed of a startup.
+              </p>
             </div>
-            <div className="about-story-right about-animate">
-              <p className="about-text">
-                Projekts started the way most great things do — with a problem. We were freelancers
-                frustrated by agencies that over-promised and under-delivered. So we built the agency
-                we always wished existed: lean, technical, and obsessively focused on outcomes.
-              </p>
-              <p className="about-text">
-                Today, we operate across Pakistan and Oman, serving clients from San Francisco to
-                Zurich. Our size is our advantage — every project gets senior-level attention, direct
-                communication with the people writing the code, and the agility of a startup.
-              </p>
-              <p className="about-text">
-                We&apos;re not trying to be the biggest agency. We&apos;re trying to be the one you
-                actually enjoy working with.
-              </p>
+            <div className="about-story-visual">
+              <div className="about-story-card">
+                <div className="about-story-card-icon">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                  </svg>
+                </div>
+                <span className="about-story-card-label">Not the biggest</span>
+                <p>The agency you actually enjoy working with.</p>
+              </div>
+              <div className="about-story-locations">
+                {LOCATIONS.map((loc) => (
+                  <div key={loc.city} className="about-location-row">
+                    <span className="about-location-flag">{loc.flag}</span>
+                    <div>
+                      <span className="about-location-city">{loc.city}</span>
+                      <span className="about-location-role">{loc.role}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="section-connector"><span className="connector-glow" /></div>
+      <div className="section-connector">
+        <span className="connector-glow" />
+      </div>
 
       {/* Values */}
       <section className="about-section">
         <div className="about-container">
-          <span className="about-label about-animate">How We Work</span>
-          <h2 className="about-heading about-animate">Principles, not just processes.</h2>
+          <div className="about-values-header about-animate">
+            <span className="about-label">How We Work</span>
+            <h2 className="about-heading">Principles, not processes.</h2>
+          </div>
           <div className="about-values-grid">
             {VALUES.map((v, i) => (
-              <div key={v.num} className="about-value about-animate" style={{ transitionDelay: `${i * 100}ms` }}>
-                <span className="about-value-num">{v.num}</span>
+              <div
+                key={v.num}
+                className="about-value about-animate"
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                <div className="about-value-icon">{v.icon}</div>
                 <h3 className="about-value-title">{v.title}</h3>
                 <p className="about-value-desc">{v.desc}</p>
               </div>
@@ -196,56 +265,44 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <div className="section-connector"><span className="connector-glow" /></div>
-
-      {/* Clients */}
-      <section className="about-section">
-        <div className="about-container">
-          <span className="about-label about-animate">Global Clients</span>
-          <h2 className="about-heading about-animate">
-            Trusted across 4 countries.
-          </h2>
-          <div className="about-clients-grid">
-            {CLIENTS.map((c, i) => (
-              <div key={c.name} className="about-client about-animate" style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="about-client-top">
-                  <span className="about-client-flag">{c.flag}</span>
-                  <div>
-                    <h3 className="about-client-name">{c.name}</h3>
-                    <span className="about-client-loc">{c.location}</span>
-                  </div>
-                </div>
-                <p className="about-client-desc">{c.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-connector"><span className="connector-glow" /></div>
+      <div className="section-connector">
+        <span className="connector-glow" />
+      </div>
 
       {/* Team */}
       <section className="about-section about-team-section">
-        <div className="about-container about-container--center">
-          <span className="about-label about-animate">The Team</span>
-          <h2 className="about-heading about-heading--center about-animate">
-            Small team. Senior talent. Zero fluff.
-          </h2>
+        <div className="about-container">
+          <div className="about-team-header about-animate">
+            <span className="about-label">The Team</span>
+            <h2 className="about-heading">Small team. Senior talent.</h2>
+          </div>
           <div className="about-team-grid">
             {TEAM.map((member, i) => (
-              <div key={member.name} className="about-member about-animate" style={{ transitionDelay: `${i * 120}ms` }}>
-                <div className="about-member-ring">
-                  <div className="about-member-avatar">
-                    <span>{member.initials}</span>
-                  </div>
+              <div
+                key={member.name}
+                className="about-member about-animate"
+                style={{ transitionDelay: `${i * 120}ms` }}
+              >
+                <div className="about-member-avatar">
+                  <Image
+                    src={member.avatar}
+                    alt={member.name}
+                    width={88}
+                    height={88}
+                    style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                    unoptimized
+                  />
                 </div>
-                <h3 className="about-member-name">{member.name}</h3>
-                <span className="about-member-role">{member.role}</span>
-                <span className="about-member-title">{member.title}</span>
-                <p className="about-member-quote">&ldquo;{member.quote}&rdquo;</p>
+                <div className="about-member-info">
+                  <h3 className="about-member-name">{member.name}</h3>
+                  <span className="about-member-title">{member.title}</span>
+                  <span className="about-member-role">{member.role}</span>
+                </div>
                 <div className="about-member-skills">
                   {member.skills.map((s) => (
-                    <span key={s} className="about-member-skill">{s}</span>
+                    <span key={s} className="about-member-skill">
+                      {s}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -254,7 +311,9 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <div className="section-connector"><span className="connector-glow" /></div>
+      <div className="section-connector">
+        <span className="connector-glow" />
+      </div>
 
       {/* CTA */}
       <section className="prefooter">
@@ -266,12 +325,26 @@ export default function AboutContent() {
             <span className="prefooter-accent">next team?</span>
           </h2>
           <div className="prefooter-cta">
-            <a href="#contact" className="btn-primary">
+            <button
+              className="btn-primary"
+              id="btn-about-start"
+              onClick={() => setOpen(true)}
+            >
               <span>Start a Conversation</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
               </svg>
-            </a>
+            </button>
           </div>
         </div>
       </section>

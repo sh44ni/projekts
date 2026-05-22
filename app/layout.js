@@ -1,24 +1,26 @@
-import { Inter, Syne } from "next/font/google";
+import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ContactProviderWrapper from "./components/ContactProviderWrapper";
+import WhatsAppButton from "./components/WhatsAppButton";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata = {
-  title: "Projekts — Custom Web Development, App & AI Solutions | Pakistan & Oman",
+  title:
+    "Projekts | Custom Web Development, App & AI Solutions | Pakistan & Oman",
   description:
-    "Projekts builds high-performance web platforms, mobile apps, and AI-powered systems for businesses in Pakistan, Oman, the US, and Switzerland. From booking systems to enterprise dashboards — built to scale.",
+    "Projekts builds high-performance web platforms, mobile apps, and AI-powered systems for businesses in Pakistan, Oman, the US, and Switzerland. From booking systems to enterprise dashboards built to scale.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -26,7 +28,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${syne.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${plusJakartaSans.variable} ${outfit.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-C7FQEBSW3V"
@@ -42,9 +48,8 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
-        <ContactProviderWrapper>
-          {children}
-        </ContactProviderWrapper>
+        <ContactProviderWrapper>{children}</ContactProviderWrapper>
+        <WhatsAppButton />
       </body>
     </html>
   );

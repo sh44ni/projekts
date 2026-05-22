@@ -10,7 +10,8 @@ const HeroScene = dynamic(() => import("./HeroScene"), {
     <div
       className="hero-canvas"
       style={{
-        background: "radial-gradient(ellipse at 50% 45%, #151518 0%, #0a0a0a 70%)",
+        background:
+          "radial-gradient(ellipse at 50% 45%, #151518 0%, #0a0a0a 70%)",
       }}
     />
   ),
@@ -21,13 +22,13 @@ export default function HeroSection() {
 
   return (
     <section className="hero" id="hero">
-      {/* 3D Canvas — full-screen background */}
+      {/* 3D Canvas full-screen background */}
       <HeroScene />
 
       {/* Vignette overlay */}
       <div className="hero-vignette" />
 
-      {/* Mobile fallback — static logo on gradient */}
+      {/* Mobile fallback static logo on gradient */}
       <div className="hero-mobile-fallback">
         <Image src="/favicon.svg" alt="" width={120} height={120} />
       </div>
@@ -36,11 +37,14 @@ export default function HeroSection() {
       <div className="hero-overlay">
         <div className="hero-content">
           <h1 className="hero-headline" id="hero-title">
-            We build web platforms, apps, and <span className="hero-highlight">AI systems</span> that run your business
+            We build web platforms, apps, and{" "}
+            <span className="hero-highlight">AI systems</span> that run your
+            business
           </h1>
           <p className="hero-subtitle" id="hero-description">
             Custom software for companies that need more than a template.
-            Booking systems, client portals, mobile apps, and intelligent automation — built from scratch, built to scale.
+            Booking systems, client portals, mobile apps, and intelligent
+            automation built from scratch, built to scale.
           </p>
           <div className="hero-cta-row" id="hero-cta-group">
             <button
@@ -69,7 +73,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

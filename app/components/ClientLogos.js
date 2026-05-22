@@ -35,7 +35,9 @@ export default function ClientLogos() {
     <section className="clients-section" id="clients">
       <div className="clients-label">
         <span className="clients-label-line" />
-        <span className="clients-label-text">Trusted by forward-thinking brands</span>
+        <span className="clients-label-text">
+          Trusted by forward-thinking brands
+        </span>
         <span className="clients-label-line" />
       </div>
 

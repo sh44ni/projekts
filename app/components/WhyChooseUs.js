@@ -11,7 +11,7 @@ const PILLARS = [
   {
     num: "02",
     title: "AI That Does Real Work",
-    desc: "Chatbots trained on your business, booking agents that replace manual workflows, predictive analytics — not gimmicks.",
+    desc: "Chatbots trained on your business, booking agents that replace manual workflows, predictive analytics not gimmicks.",
   },
   {
     num: "03",
@@ -34,9 +34,7 @@ const STATS = [
 
 function AnimatedStat({ value, inView }) {
   return (
-    <span className={`why-stat-value ${inView ? "visible" : ""}`}>
-      {value}
-    </span>
+    <span className={`why-stat-value ${inView ? "visible" : ""}`}>{value}</span>
   );
 }
 
@@ -49,7 +47,7 @@ export default function WhyChooseUs() {
       ([entry]) => {
         if (entry.isIntersecting) setInView(true);
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
@@ -58,16 +56,19 @@ export default function WhyChooseUs() {
   return (
     <section className="why-section" id="why" ref={sectionRef}>
       <div className="why-inner">
-        {/* Left — bold statement */}
+        {/* Left bold statement */}
         <div className="why-statement-col">
           <span className="why-eyebrow">Why Projekts</span>
           <h2 className="why-statement">
             We don&apos;t hand you a website and disappear.
-            <span className="why-statement-accent"> We build systems that run your operations.</span>
+            <span className="why-statement-accent">
+              {" "}
+              We build systems that run your operations.
+            </span>
           </h2>
         </div>
 
-        {/* Right — value pillars */}
+        {/* Right value pillars */}
         <div className="why-pillars-col">
           {PILLARS.map((p, i) => (
             <div
