@@ -2789,10 +2789,9 @@ svg {
       transparent 1px,
       transparent 35px
     );
-  transform: rotateX(55deg) translateZ(0);
   transform-origin: center bottom;
   animation: gridScroll 8s linear infinite;
-  will-change: transform, background-position;
+  will-change: transform;
   backface-visibility: hidden;
 }
 
@@ -2807,8 +2806,8 @@ svg {
 }
 
 @keyframes gridScroll {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 35px; }
+  0% { transform: rotateX(55deg) translateY(0) translateZ(0); }
+  100% { transform: rotateX(55deg) translateY(35px) translateZ(0); }
 }
 
 /* ─── Footer Content ─── */
@@ -3024,13 +3023,13 @@ svg {
     display: none;
   }
 
-  /* Show mobile fallback, hide canvas */
+  /* Show canvas, hide mobile fallback */
   .hero-canvas {
-    display: none;
+    display: block;
   }
 
   .hero-mobile-fallback {
-    display: flex;
+    display: none;
   }
 
   /* Services mobile */

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useMemo, useEffect, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 /* ═══════════════════════════════════════════
@@ -216,6 +216,10 @@ function LogoPiece({
 
 function LogoGroup({ mouse }) {
   const groupRef = useRef();
+  const { width } = useThree((state) => state.viewport);
+  const isMobile = width < 4.8;
+  const responsiveScale = isMobile ? Math.min(0.85, width * 0.18) : 1.2;
+  const responsivePosY = isMobile ? 0.75 : 0;
 
   // From the actual Projekts logo SVG icon polygons
   const accentPoints = [
@@ -283,12 +287,18 @@ function LogoGroup({ mouse }) {
     return { accentGeo: ag, mainGeo: mg };
   }, []);
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!groupRef.current) return;
 
-    // Mouse-driven rotation only full 360° range
-    const targetY = mouse.current.x * Math.PI; // -π to π
-    const targetX = -mouse.current.y * Math.PI * 0.5; // -π/2 to π/2
+    const time = state.clock.getElapsedTime();
+    
+    // Slow continuous drift
+    const driftY = time * 0.12;
+    const driftX = Math.sin(time * 0.5) * 0.12;
+
+    // Combine mouse/touch position with drift
+    const targetY = mouse.current.x * Math.PI + driftY;
+    const targetX = -mouse.current.y * Math.PI * 0.4 + driftX;
 
     groupRef.current.rotation.y = THREE.MathUtils.lerp(
       groupRef.current.rotation.y,
@@ -303,7 +313,7 @@ function LogoGroup({ mouse }) {
   });
 
   return (
-    <group ref={groupRef} scale={1.2}>
+    <group ref={groupRef} scale={responsiveScale} position={[0, responsivePosY, 0]}>
       <LogoPiece
         geometry={accentGeo}
         edgeColor="#ffffff"
@@ -352,8 +362,27 @@ export default function HeroScene() {
       mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
 
+    const handleTouchMove = (e) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        mouse.current.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouse.current.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      mouse.current.x = 0;
+      mouse.current.y = 0;
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
   }, []);
 
   if (!mounted) {

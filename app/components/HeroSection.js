@@ -12,8 +12,21 @@ const HeroScene = dynamic(() => import("./HeroScene"), {
       style={{
         background:
           "radial-gradient(ellipse at 50% 45%, #151518 0%, #0a0a0a 70%)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
-    />
+    >
+      <img
+        src="/favicon.svg"
+        alt="Loading..."
+        style={{
+          width: "120px",
+          height: "auto",
+          opacity: 0.15,
+        }}
+      />
+    </div>
   ),
 });
 
@@ -28,10 +41,7 @@ export default function HeroSection() {
       {/* Vignette overlay */}
       <div className="hero-vignette" />
 
-      {/* Mobile fallback static logo on gradient */}
-      <div className="hero-mobile-fallback">
-        <Image src="/favicon.svg" alt="" width={120} height={120} />
-      </div>
+
 
       {/* HTML content overlay */}
       <div className="hero-overlay">
