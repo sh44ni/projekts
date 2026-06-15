@@ -1,24 +1,25 @@
 "use client";
 
 import Image from "next/image";
+import { useContact } from "./ContactPopup";
 
 const NAV_COLS = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "#about" },
-      { label: "Careers", href: "#" },
-      { label: "Blog", href: "#blog" },
-      { label: "Contact", href: "#contact" },
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Blog", href: "/blog" },
+      { label: "Contact", href: "#contact", isContact: true },
     ],
   },
   {
     title: "Services",
     links: [
-      { label: "Web Development", href: "#services" },
-      { label: "App Development", href: "#services" },
-      { label: "AI Solutions", href: "#services" },
-      { label: "Digital Strategy", href: "#services" },
+      { label: "Web Development", href: "/services/web-development" },
+      { label: "App Development", href: "/services/app-development" },
+      { label: "AI Solutions", href: "/services/ai-solutions" },
+      { label: "Digital Strategy", href: "/services/digital-strategy" },
     ],
   },
   {
@@ -27,13 +28,16 @@ const NAV_COLS = [
       {
         label: "Facebook",
         href: "https://www.facebook.com/profile.php?id=61578025118254",
+        external: true,
       },
-      { label: "WhatsApp", href: "https://wa.me/923040260023" },
+      { label: "WhatsApp", href: "https://wa.me/923040260023", external: true },
     ],
   },
 ];
 
 export default function Footer() {
+  const { setOpen } = useContact();
+
   return (
     <footer className="footer" id="footer">
       {/* Grid floor background layer */}
@@ -66,9 +70,25 @@ export default function Footer() {
                 <ul className="footer-col-list">
                   {col.links.map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="footer-col-link">
-                        {link.label}
-                      </a>
+                      {link.isContact ? (
+                        <button
+                          type="button"
+                          className="footer-col-link footer-col-link--btn"
+                          onClick={() => setOpen(true)}
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className="footer-col-link"
+                          {...(link.external
+                            ? { target: "_blank", rel: "noopener noreferrer" }
+                            : {})}
+                        >
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -82,8 +102,8 @@ export default function Footer() {
             © {new Date().getFullYear()} Projekts. All rights reserved.
           </span>
           <div className="footer-legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
           </div>
         </div>
       </div>

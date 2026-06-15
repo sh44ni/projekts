@@ -43,6 +43,7 @@ model CaseStudy {
   id          String   @id @default(cuid())
   slug        String   @unique
   published   Boolean  @default(false)
+  featured    Boolean  @default(false)
   sortOrder   Int      @default(0)
 
   // Card-level (homepage + listing)
@@ -81,4 +82,35 @@ model CaseStudy {
 
   @@index([published, sortOrder])
   @@index([slug])
+}
+
+model JobPosting {
+  id           String           @id @default(cuid())
+  title        String
+  type         String           // e.g. "Full-time · Remote"
+  dept         String           // e.g. "Engineering", "Design"
+  desc         String
+  published    Boolean          @default(true)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  applications JobApplication[]
+
+  @@index([published])
+}
+
+model JobApplication {
+  id           String      @id @default(cuid())
+  name         String
+  email        String
+  phone        String?
+  linkedin     String?
+  resumeUrl    String      // Path to uploaded resume
+  coverLetter  String?     @default("")
+  jobPostingId String?     // Nullable for spontaneous application
+  jobPosting   JobPosting? @relation(fields: [jobPostingId], references: [id], onDelete: SetNull)
+  read         Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+
+  @@index([createdAt])
+  @@index([read])
 }

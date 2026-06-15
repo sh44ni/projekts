@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, notFound } from "next/navigation";
 import CaseStudyLayout from "../../components/CaseStudyLayout";
+import { getCaseStudyImages } from "@/lib/caseStudyImages";
 
 export default function CaseStudyDetailPage() {
   const { slug } = useParams();
@@ -22,7 +23,7 @@ export default function CaseStudyDetailPage() {
           headline: data.headline || data.title,
           subtitle: data.subtitle || data.description,
           screenshotSections: Array.isArray(data.sections) ? data.sections : [],
-          gallery: Array.isArray(data.gallery) ? data.gallery : [],
+          gallery: getCaseStudyImages(data),
           stats: Array.isArray(data.stats) ? data.stats : [],
           features: Array.isArray(data.features) ? data.features : [],
           results: Array.isArray(data.results) ? data.results : [],

@@ -33,7 +33,8 @@ export default function AdminLogin() {
   return (
     <div className="adm-login-page">
       <div className="adm-login-card">
-        <h1 className="adm-login-title">Projekts Admin</h1>
+        <span className="adm-login-mark" aria-hidden="true">P</span>
+        <h1 className="adm-login-title">Projekts Control Deck</h1>
         <p className="adm-login-subtitle">Sign in to manage your dashboard</p>
         {error && <div className="adm-login-error">{error}</div>}
         <form onSubmit={handleSubmit} className="adm-login-form">

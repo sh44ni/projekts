@@ -48,6 +48,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
+        <div className="site-bg" aria-hidden="true" />
         <ContactProviderWrapper>{children}</ContactProviderWrapper>
         <WhatsAppButton />
       </body>

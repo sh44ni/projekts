@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { getCaseStudyImages } from "@/lib/caseStudyImages";
+import CaseStudyImage from "../components/CaseStudyImage";
 
 export default function CaseStudyListContent() {
   const [cases, setCases] = useState([]);
@@ -55,8 +56,8 @@ export default function CaseStudyListContent() {
             id={`cs-listing-${c.slug}`}
           >
             <div className="cs-listing-card-image">
-              <Image
-                src={c.coverImage || (Array.isArray(c.gallery) && c.gallery[0]) || "https://picsum.photos/seed/placeholder/600/400"}
+              <CaseStudyImage
+                caseStudy={c}
                 alt={c.client}
                 width={600}
                 height={400}

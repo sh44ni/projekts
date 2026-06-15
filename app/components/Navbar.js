@@ -1,13 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useContact } from "./ContactPopup";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+  const navLinksRef = useRef(null);
   const { setOpen } = useContact();
+
+  const moveIndicator = (e) => {
+    const list = navLinksRef.current;
+    if (!list) return;
+    const rect = list.getBoundingClientRect();
+    const target = e.currentTarget.getBoundingClientRect();
+    setIndicator({
+      left: target.left - rect.left,
+      width: target.width,
+      opacity: 1,
+    });
+  };
+
+  const hideIndicator = () => setIndicator((i) => ({ ...i, opacity: 0 }));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,19 +69,33 @@ export default function Navbar() {
             />
           </a>
 
-          <ul className="nav-links" id="nav-links">
+          <ul
+            className="nav-links"
+            id="nav-links"
+            ref={navLinksRef}
+            onMouseLeave={hideIndicator}
+          >
+            <span
+              className="nav-indicator"
+              aria-hidden="true"
+              style={{
+                left: `${indicator.left}px`,
+                width: `${indicator.width}px`,
+                opacity: indicator.opacity,
+              }}
+            />
             <li>
-              <a href="/about" className="nav-link">
+              <a href="/about" className="nav-link" onMouseEnter={moveIndicator}>
                 About
               </a>
             </li>
             <li>
-              <a href="/#services" className="nav-link">
+              <a href="/#services" className="nav-link" onMouseEnter={moveIndicator}>
                 Services
               </a>
             </li>
             <li>
-              <a href="/#case-studies" className="nav-link">
+              <a href="/case-studies" className="nav-link" onMouseEnter={moveIndicator}>
                 Case Studies
               </a>
             </li>
@@ -110,7 +140,7 @@ export default function Navbar() {
               Services
             </a>
             <a
-              href="/#case-studies"
+              href="/case-studies"
               className="mobile-menu-link"
               onClick={closeMenu}
             >
