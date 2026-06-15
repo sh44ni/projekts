@@ -2789,9 +2789,11 @@ svg {
       transparent 1px,
       transparent 35px
     );
-  transform: rotateX(55deg);
+  transform: rotateX(55deg) translateZ(0);
   transform-origin: center bottom;
   animation: gridScroll 8s linear infinite;
+  will-change: transform, background-position;
+  backface-visibility: hidden;
 }
 
 .floor-horizon {
