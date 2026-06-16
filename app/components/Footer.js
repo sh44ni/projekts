@@ -55,7 +55,7 @@ export default function Footer() {
               alt="Projekts"
               width={130}
               height={30}
-              style={{ objectFit: "contain" }}
+              style={{ objectFit: "contain", objectPosition: "left center" }}
             />
             <p className="footer-brand-desc">
               We design and build high-performance digital products that drive
