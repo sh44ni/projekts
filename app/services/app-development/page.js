@@ -1,12 +1,19 @@
 import ServicePageLayout from "../../components/ServicePageLayout";
 
 export const metadata = {
-  title: "App Development Services Projekts | iOS, Android & Cross-Platform",
+  title: "Mobile App Development Company USA | iOS & Android Apps",
   description:
-    "Projekts delivers native and cross-platform mobile apps with seamless UX. React Native, Swift, Flutter from concept to App Store launch.",
+    "Full-cycle mobile app development for US startups and enterprises. We engineer high-performance React Native and native iOS/Android applications with scalable cloud backends.",
+  alternates: {
+    canonical: "https://projektsvision.com/services/app-development",
+  },
   openGraph: {
-    title: "App Development Services Projekts",
-    description: "Mobile apps that users love, built for iOS and Android.",
+    title: "Mobile App Development Company USA | Projekts Vision",
+    description:
+      "Native and cross-platform mobile apps engineered for speed, intuitive UX, and enterprise scale.",
+    url: "https://projektsvision.com/services/app-development",
+    locale: "en_US",
+    type: "website",
   },
 };
 

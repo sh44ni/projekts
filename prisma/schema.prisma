@@ -33,10 +33,60 @@ model PageView {
 }
 
 model AdminUser {
-  id           String   @id @default(cuid())
-  email        String   @unique
+  id           String           @id @default(cuid())
+  email        String           @unique
+  name         String?          @default("Team Member")
   passwordHash String
-  createdAt    DateTime @default(now())
+  role         String           @default("member") // superadmin, admin, member
+  avatar       String?
+  lastLoginAt  DateTime?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt @default(now())
+  invoices     Invoice[]
+  invitesSent  AdminWhitelist[] @relation("InvitedBy")
+}
+
+model AdminWhitelist {
+  id               String     @id @default(cuid())
+  email            String     @unique
+  role             String     @default("member") // superadmin, admin, member
+  status           String     @default("pending") // pending, active, revoked
+  inviteToken      String?    @unique
+  verificationCode String?
+  codeExpiresAt    DateTime?
+  invitedById      String?
+  invitedBy        AdminUser? @relation("InvitedBy", fields: [invitedById], references: [id], onDelete: SetNull)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@index([email])
+  @@index([status])
+}
+
+model Invoice {
+  id             String    @id @default(cuid())
+  invoiceNumber  String
+  clientName     String
+  clientAddress  String    @default("")
+  date           String
+  dueDate        String?   @default("")
+  currency       String    @default("$")
+  paymentMethod  String    @default("Check")
+  checkNo        String?   @default("")
+  paymentDetails String?   @default("")
+  paid           Boolean   @default(false)
+  showSeal       Boolean   @default(true)
+  items          Json      @default("[]")
+  subtotal       Float     @default(0)
+  totalAmount    Float     @default(0)
+  notes          String?   @default("")
+  createdById    String
+  createdBy      AdminUser @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([createdById, createdAt])
+  @@index([invoiceNumber])
 }
 
 model CaseStudy {
@@ -113,4 +163,46 @@ model JobApplication {
 
   @@index([createdAt])
   @@index([read])
+}
+
+model ChatSession {
+  id             String        @id @default(cuid())
+  sessionKey     String        @unique
+  visitorName    String?
+  visitorEmail   String?
+  visitorPhone   String?
+  visitorCompany String?
+  leadStatus     String        @default("new") // new, contacted, qualified, proposal, won, archived
+  leadScore      Int           @default(10)     // 1 to 100
+  budget         String?
+  timeline       String?
+  projectScope   String?
+  notes          String?       @default("")
+  ipAddress      String?
+  userAgent      String?
+  referrer       String?
+  unreadByAdmin  Boolean       @default(true)
+  lastMessageAt  DateTime      @default(now())
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  messages       ChatMessage[]
+
+  @@index([createdAt])
+  @@index([lastMessageAt])
+  @@index([leadStatus])
+  @@index([unreadByAdmin])
+}
+
+model ChatMessage {
+  id         String      @id @default(cuid())
+  sessionId  String
+  session    ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sender     String      // user, assistant, system, tool
+  content    String
+  toolName   String?
+  toolArgs   Json?
+  toolResult Json?
+  createdAt  DateTime    @default(now())
+
+  @@index([sessionId, createdAt])
 }

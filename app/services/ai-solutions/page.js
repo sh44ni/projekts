@@ -1,13 +1,19 @@
 import ServicePageLayout from "../../components/ServicePageLayout";
 
 export const metadata = {
-  title: "AI Solutions & Machine Learning Projekts | Custom AI Development",
+  title: "Enterprise AI Solutions & Intelligent Automation USA",
   description:
-    "Projekts builds custom AI solutions from LLM integrations and intelligent automation to computer vision and predictive analytics. Transform your workflows with AI.",
+    "Deploy custom machine learning models, private LLM integrations, and intelligent automation systems that eliminate operational bottlenecks for US businesses.",
+  alternates: {
+    canonical: "https://projektsvision.com/services/ai-solutions",
+  },
   openGraph: {
-    title: "AI Solutions & Machine Learning Projekts",
+    title: "Enterprise AI Solutions & Intelligent Automation USA | Projekts Vision",
     description:
-      "Custom AI that transforms your business operations and customer experience.",
+      "Transform business workflows with custom LLMs, predictive intelligence, and end-to-end automation.",
+    url: "https://projektsvision.com/services/ai-solutions",
+    locale: "en_US",
+    type: "website",
   },
 };
 

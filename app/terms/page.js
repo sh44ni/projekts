@@ -27,7 +27,7 @@ export default function TermsPage() {
           <div className="legal-section">
             <h2>1. Acceptance of Terms</h2>
             <p>
-              By accessing or using the Projekts website (projekts.co) or engaging Projekts for
+              By accessing or using the Projekts Vision website (projektsvision.com) or engaging Projekts Vision for
               services, you agree to be bound by these Terms of Service (&ldquo;Terms&rdquo;). If you do not
               agree, please do not use the Site or our services.
             </p>
@@ -128,7 +128,7 @@ export default function TermsPage() {
             <h2>10. Changes to Terms</h2>
             <p>
               We may revise these Terms at any time. The current version is always posted at
-              projekts.co/terms. Continued use of the Site or services after changes constitutes
+              projektsvision.com/terms. Continued use of the Site or services after changes constitutes
               acceptance of the updated Terms.
             </p>
           </div>
@@ -137,7 +137,8 @@ export default function TermsPage() {
             <h2>11. Contact</h2>
             <p>
               Questions about these Terms? Email us at{" "}
-              <a href="mailto:hello@projekts.co">hello@projekts.co</a>.
+              <a href="mailto:support@projektsvision.com">support@projektsvision.com</a> or{" "}
+              <a href="mailto:info@projektsvision.com">info@projektsvision.com</a>.
             </p>
           </div>
         </div>

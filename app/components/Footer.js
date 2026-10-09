@@ -30,7 +30,8 @@ const NAV_COLS = [
         href: "https://www.facebook.com/profile.php?id=61578025118254",
         external: true,
       },
-      { label: "WhatsApp", href: "https://wa.me/923040260023", external: true },
+      { label: "info@projektsvision.com", href: "mailto:info@projektsvision.com", external: true },
+      { label: "support@projektsvision.com", href: "mailto:support@projektsvision.com", external: true },
     ],
   },
 ];

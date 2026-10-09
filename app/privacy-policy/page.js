@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
           <div className="legal-section">
             <h2>1. Introduction</h2>
             <p>
-              Projekts (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website at projekts.co (the &ldquo;Site&rdquo;). This
+              Projekts Vision (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website at projektsvision.com (the &ldquo;Site&rdquo;). This
               Privacy Policy explains how we collect, use, disclose, and safeguard your information
               when you visit our Site or engage us for services. Please read it carefully.
             </p>
@@ -126,7 +126,7 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p>
               To exercise these rights, contact us at{" "}
-              <a href="mailto:hello@projekts.co">hello@projekts.co</a>.
+              <a href="mailto:support@projektsvision.com">support@projektsvision.com</a>.
             </p>
           </div>
 
@@ -143,8 +143,8 @@ export default function PrivacyPolicyPage() {
             <h2>10. Contact</h2>
             <p>
               If you have questions about this Privacy Policy, please contact us at{" "}
-              <a href="mailto:hello@projekts.co">hello@projekts.co</a> or via WhatsApp at{" "}
-              <a href="https://wa.me/923040260023">+92 304 026 0023</a>.
+              <a href="mailto:support@projektsvision.com">support@projektsvision.com</a> or{" "}
+              <a href="mailto:info@projektsvision.com">info@projektsvision.com</a>.
             </p>
           </div>
         </div>

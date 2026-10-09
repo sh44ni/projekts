@@ -3,9 +3,20 @@ import Footer from "../components/Footer";
 import AboutContent from "../components/AboutContent";
 
 export const metadata = {
-  title: "About Projekts Our Team, Story & Global Reach",
+  title: "About Projekts Vision | Global Software Engineering & US Client Delivery",
   description:
-    "Projekts is a digital agency based in Pakistan and Oman, delivering custom web, app, and AI solutions to clients across the US, Switzerland, Oman, and Pakistan.",
+    "Learn about Projekts Vision, our executive leadership, and how we engineer custom software, web platforms, and AI solutions for high-growth businesses across the United States.",
+  alternates: {
+    canonical: "https://projektsvision.com/about",
+  },
+  openGraph: {
+    title: "About Projekts Vision | Global Engineering & US Client Delivery",
+    description:
+      "Executive leadership and engineering talent building scalable digital products for US and international clients.",
+    url: "https://projektsvision.com/about",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {

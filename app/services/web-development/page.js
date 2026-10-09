@@ -1,13 +1,19 @@
 import ServicePageLayout from "../../components/ServicePageLayout";
 
 export const metadata = {
-  title: "Web Development Services Projekts | Custom Web Apps & Platforms",
+  title: "Custom Web Development Services USA | React & Next.js Platforms",
   description:
-    "Projekts builds high-performance web applications, e-commerce platforms, and custom SaaS solutions using React, Next.js, and Node.js. Get a free consultation.",
+    "Enterprise-grade web application development and bespoke SaaS platforms engineered for US businesses. Built with React, Next.js, and Node.js for speed, security, and conversion.",
+  alternates: {
+    canonical: "https://projektsvision.com/services/web-development",
+  },
   openGraph: {
-    title: "Web Development Services Projekts",
+    title: "Custom Web Development Services USA | Projekts Vision",
     description:
-      "Custom web applications built for scale, speed, and conversion.",
+      "Bespoke web platforms, SaaS dashboards, and headless commerce engineered for scale and speed.",
+    url: "https://projektsvision.com/services/web-development",
+    locale: "en_US",
+    type: "website",
   },
 };
 

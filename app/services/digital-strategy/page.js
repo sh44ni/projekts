@@ -1,13 +1,19 @@
 import ServicePageLayout from "../../components/ServicePageLayout";
 
 export const metadata = {
-  title: "Digital Strategy & Consulting Projekts | Growth-Driven Strategy",
+  title: "Digital Product Strategy & Software Architecture Consulting",
   description:
-    "Projekts provides data-driven digital strategy, UX audits, SEO optimization, and technical consulting to align technology with your business goals.",
+    "Technical architecture audits, digital roadmaps, and software consulting for growth-stage businesses in the United States looking to modernize and scale.",
+  alternates: {
+    canonical: "https://projektsvision.com/services/digital-strategy",
+  },
   openGraph: {
-    title: "Digital Strategy & Consulting Projekts",
+    title: "Digital Product Strategy & Software Architecture | Projekts Vision",
     description:
-      "Data-driven strategy that turns technology into competitive advantage.",
+      "Clear technical direction, stack audits, and strategic roadmaps for scaling software products.",
+    url: "https://projektsvision.com/services/digital-strategy",
+    locale: "en_US",
+    type: "website",
   },
 };
 

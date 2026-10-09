@@ -6,6 +6,13 @@ import { useContact } from "./ContactPopup";
 
 const TEAM = [
   {
+    name: "Christian Lavelle",
+    role: "Executive Leadership & Strategy",
+    title: "Chief Executive Officer",
+    avatar: "https://picsum.photos/seed/christian/200/200",
+    skills: ["Strategic Vision", "Executive Leadership", "Product Direction", "Client Growth"],
+  },
+  {
     name: "Zeeshan Khan",
     role: "Full-Stack Developer",
     title: "Head of Operations",
@@ -119,12 +126,78 @@ const VALUES = [
   },
 ];
 
+
+function FlagUS() {
+  return (
+    <svg viewBox="0 0 640 480" className="about-location-flag-svg" aria-label="United States Flag">
+      <g fillRule="evenodd">
+        <path fill="#bd3d44" d="M0 0h640v480H0z" />
+        <path stroke="#fff" strokeWidth="37" d="M0 55.5h640M0 129.5h640M0 203.5h640M0 277.5h640M0 351.5h640M0 425.5h640" />
+        <path fill="#192f5d" d="M0 0h260v259H0z" />
+        <g fill="#fff">
+          <circle cx="30" cy="28" r="7" /><circle cx="76" cy="28" r="7" /><circle cx="122" cy="28" r="7" /><circle cx="168" cy="28" r="7" /><circle cx="214" cy="28" r="7" />
+          <circle cx="53" cy="56" r="7" /><circle cx="99" cy="56" r="7" /><circle cx="145" cy="56" r="7" /><circle cx="191" cy="56" r="7" />
+          <circle cx="30" cy="84" r="7" /><circle cx="76" cy="84" r="7" /><circle cx="122" cy="84" r="7" /><circle cx="168" cy="84" r="7" /><circle cx="214" cy="84" r="7" />
+          <circle cx="53" cy="112" r="7" /><circle cx="99" cy="112" r="7" /><circle cx="145" cy="112" r="7" /><circle cx="191" cy="112" r="7" />
+          <circle cx="30" cy="140" r="7" /><circle cx="76" cy="140" r="7" /><circle cx="122" cy="140" r="7" /><circle cx="168" cy="140" r="7" /><circle cx="214" cy="140" r="7" />
+          <circle cx="53" cy="168" r="7" /><circle cx="99" cy="168" r="7" /><circle cx="145" cy="168" r="7" /><circle cx="191" cy="168" r="7" />
+          <circle cx="30" cy="196" r="7" /><circle cx="76" cy="196" r="7" /><circle cx="122" cy="196" r="7" /><circle cx="168" cy="196" r="7" /><circle cx="214" cy="196" r="7" />
+          <circle cx="53" cy="224" r="7" /><circle cx="99" cy="224" r="7" /><circle cx="145" cy="224" r="7" /><circle cx="191" cy="224" r="7" />
+        </g>
+      </g>
+    </svg>
+  );
+}
+
+function FlagCH() {
+  return (
+    <svg viewBox="0 0 512 512" className="about-location-flag-svg" aria-label="Switzerland Flag">
+      <path fill="#d52b1e" d="M0 0h512v512H0z" />
+      <g fill="#fff">
+        <path d="M196 96h120v320H196z" />
+        <path d="M96 196h320v120H96z" />
+      </g>
+    </svg>
+  );
+}
+
+function FlagOM() {
+  return (
+    <svg viewBox="0 0 640 480" className="about-location-flag-svg" aria-label="Oman Flag">
+      <path fill="#fff" d="M0 0h640v160H0z" />
+      <path fill="#db161b" d="M0 160h640v160H0z" />
+      <path fill="#008000" d="M0 320h640v160H0z" />
+      <path fill="#db161b" d="M0 0h200v480H0z" />
+      <g fill="#fff" transform="translate(100, 80) scale(0.45)">
+        <circle cx="0" cy="-30" r="14" />
+        <path d="M-6 -15 h12 v40 h-12 z" />
+        <path d="M-25 5 L25 45 M25 5 L-25 45" stroke="#fff" strokeWidth="8" />
+        <path d="M-5 25 Q0 55 15 50 Q5 35 -5 25" fill="#fff" />
+      </g>
+    </svg>
+  );
+}
+
+function FlagPK() {
+  return (
+    <svg viewBox="0 0 640 480" className="about-location-flag-svg" aria-label="Pakistan Flag">
+      <path fill="#01411c" d="M0 0h640v480H0z" />
+      <path fill="#fff" d="M0 0h160v480H0z" />
+      <g fill="#fff" transform="translate(400, 240) rotate(-40)">
+        <path d="M0,-95 A100,100 0 1,0 85,85 A90,90 0 1,1 0,-95 Z" />
+        <polygon points="45,-45 52,-25 73,-25 56,-12 62,9 45,-3 28,9 34,-12 17,-25 38,-25" fill="#fff" transform="translate(15, -15) scale(1.1)" />
+      </g>
+    </svg>
+  );
+}
+
 const LOCATIONS = [
-  { city: "Pakistan", flag: "🇵🇰", role: "Engineering & Design HQ" },
-  { city: "Oman", flag: "🇴🇲", role: "Operations & Client Services" },
-  { city: "United States", flag: "🇺🇸", role: "Client Market" },
-  { city: "Switzerland", flag: "🇨🇭", role: "Client Market" },
+  { city: "United States", FlagComponent: FlagUS, role: "North America Operations & Client Strategy" },
+  { city: "Switzerland", FlagComponent: FlagCH, role: "European Client Engagements" },
+  { city: "Oman", FlagComponent: FlagOM, role: "Middle East Operations & Client Services" },
+  { city: "Pakistan", FlagComponent: FlagPK, role: "Engineering & Technology Delivery Center" },
 ];
+
 
 export default function AboutContent() {
   const { setOpen } = useContact();
@@ -158,9 +231,9 @@ export default function AboutContent() {
             <span className="about-headline-accent">global ambition.</span>
           </h1>
           <p className="about-hero-desc">
-            Developers, designers, and strategists based in Pakistan and Oman
-            building digital products for clients across the US, Switzerland,
-            and beyond.
+            Engineering custom web platforms, mobile apps, and intelligent automation
+            systems for businesses across the United States, backed by dedicated
+            global delivery hubs.
           </p>
         </div>
       </section>
@@ -225,7 +298,7 @@ export default function AboutContent() {
               <div className="about-story-locations">
                 {LOCATIONS.map((loc) => (
                   <div key={loc.city} className="about-location-row">
-                    <span className="about-location-flag">{loc.flag}</span>
+                    <span className="about-location-flag"><loc.FlagComponent /></span>
                     <div>
                       <span className="about-location-city">{loc.city}</span>
                       <span className="about-location-role">{loc.role}</span>
